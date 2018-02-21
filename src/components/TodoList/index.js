@@ -1,14 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, PropTypes } from 'react';
 import Todo from './../TODO';
+// import axios from 'axios';
+// const url = 'http://localhost:8080/fruits';
 
-const TodoList = ({ todos, onTodoClick }) => (
-    <ul>
-        {todos.map(todo => (
-            <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
-        ))}
-    </ul>
-);
+
+class TodoList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            todos: [],
+        };
+    }
+
+    // todo : fix error with axios ...
+    // componentDidMount() {
+    //     axios.get(url, {headers: {'Access-Control-Allow-Origin': '*',
+    //         proxy: {
+    //             host: 'localhost',
+    //             port: 8080
+    //         }
+    //     }})
+    //         .then(response => console.log(response))
+    //         .catch(response => console.log(response))
+    //         .then(data => this.setState({todos: data}));
+    // }
+
+    render() {
+        return (<ul>
+            {this.props.todos.map(todo => (
+                <Todo key={todo.id} {...todo} onClick={() => this.props.onTodoClick(todo.id)}/>
+            ))}
+        </ul>);
+    }
+}
 
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(
